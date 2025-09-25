@@ -15,7 +15,7 @@ no *criarNo(int conteudo){
     novo->conteudo = conteudo;
     return novo;
 }
-//ENQUEUE
+//ENQUEUE - Enfileirar
 void inserirNo(no **head, int conteudo){
     no *p;
     no *rear = *head;
@@ -32,7 +32,7 @@ void inserirNo(no **head, int conteudo){
     }
     printf("-> Item da fila inserido: %d\n", p->conteudo);
 }
-//DEQUEUES
+//DEQUEUES - Desinfileirar
 no *removerNO(no **head){
     no *p;
     if(*head == NULL){
