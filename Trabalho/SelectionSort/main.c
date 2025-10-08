@@ -57,12 +57,13 @@ void copiarVetorInicial(int *vetorInicial, int *vetorOrdenado, int tam){
     }
 }
 // Funçaão para fazer um vetor reverso
-void vetorReverso(int *vetorOrdenado, int *vetorReverso, int tam){
+void inverterVetor(int *vetorOrdenado, int *vetorReverso, int tam){
     int j = 0;
     for(int i = tam -1;i >= 0;i--){
         vetorReverso[j] = vetorOrdenado[i];
         j++;
     }
+    exibirVetor(vetorReverso, tam); // Teste
 }
 
 /*
@@ -122,43 +123,48 @@ int main(){
     end = clock();
     double tempo0 = ((double)(end - start)) / CLOCKS_PER_SEC;
 
+    
     int *vetorCopiado = criarVetor(tam);
     vetorInicial = preencherVetor(vetorInicial, tam);
-
+    
     start = clock();
     printf("\n\t> Vetor inicial:\n");
     exibirVetor(vetorInicial, tam);
     end = clock();
     double tempo1 = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+    
     copiarVetorInicial(vetorInicial, vetorCopiado, tam);
-
+    
     start = clock();
     printf("\n\t> Vetor Ordenado:\n");
     selectionSort(vetorCopiado, tam);
     end = clock();
     double tempo2 = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+    
+    
     start = clock();
     printf("\n\t> Ordenar Novamente o Vetor:\n");
     selectionSort(vetorCopiado, tam);
     end = clock();
     double tempo3 = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+    
     start = clock();
     printf("\n\t> Ordenar do inicio ate a metade:\n");
     ordenarMetadeInicial(vetorInicial, metade, tam);
     end = clock();
     double tempo4 = ((double)(end - start)) / CLOCKS_PER_SEC;
-
+    
     start = clock();
     printf("\n\t> Ordenar da metade ate o final:\n");
     ordenarMetadeFinal(vetorInicial, metade, tam);
     end = clock();
     double tempo5 = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("\n\t> Vetor reverso\n");
+    int *vetorReverso = criarVetor(tam);
+    inverterVetor(vetorCopiado, vetorReverso, tam);
 
     exibirTempo(tempo0, tempo1, tempo2, tempo3, tempo4, tempo5);
-
+    
     printf("\n");
     free(vetorInicial);
     free(vetorCopiado);
