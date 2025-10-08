@@ -1,110 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
-#define TAM 10
-
-// Ele criar um vetor alocando mémoria dinamicamente
-int * criarVetor(int tam){
-    if(tam <= 0){
-        printf("> Tamanho invalido!\n");// Caso tamanho seja 0 ele é inválido
-        exit(1);
-    }
-
-    int *vetor = malloc(tam * sizeof(int)); // Faz a alocação dinâmica
-
-    if(vetor == NULL){
-        printf("> Erro ao alocar memoria!\n"); // Verifica se foi alocado certo
-        exit(1);
-    }
-    return vetor; // Caso a alocação e o tamanho seja válido ele retorna o ponteiro do meu vetor
-}
-// Função pra preencher o vetor com valores aleatórios de 0 a 100
-int * preencherVetor(int *vetor, int tam){
-    for(int i = 0; i < tam; i++){
-        vetor[i] = rand() % 101;
-    }
-    return vetor;
-}
-void exibirVetor(int *vetor, int tam){
-    for(int i = 0; i < tam; i++){
-        printf("| %d ", vetor[i]);
-    }
-    printf("|\n");
-}
-// Função Selection Sort
-void selectionSort(int *vetor, int tam){
-    for(int i = 0; i < tam - 1; i++){
-        int aux = i; // Inicia com o auxiliar dizendo que é o menor valor
-        for(int j = i + 1; j < tam; j++){
-            if(vetor[j] < vetor[aux]){ // Faz a seunda interação pra passar por todos os valores do vetor e comparar se o atual é menor ou maior
-                aux = j; // Se for menro faz a troca
-            }
-        }
-        if(aux != i){ // Caso o menor valor esteja em outra possição diferente de da vetor[i]
-            int temp = vetor[i];
-            vetor[i] = vetor[aux];
-            vetor[aux] = temp; // Fazemos a troca deles
-        }
-    }
-    exibirVetor(vetor, tam);
-}
-
-
-void copiarVetorInicial(int *vetorInicial, int *vetorOrdenado, int tam){
-    for(int i = 0; i < tam; i++){
-        vetorOrdenado[i] = vetorInicial[i];
-    }
-}
-// Funçaão para fazer um vetor reverso
-void inverterVetor(int *vetorOrdenado, int *vetorReverso, int tam){
-    int j = 0;
-    for(int i = tam -1;i >= 0;i--){
-        vetorReverso[j] = vetorOrdenado[i];
-        j++;
-    }
-    exibirVetor(vetorReverso, tam); // Teste
-}
-
-/*
- * @André
- * Ainda não entendi esses métodos
-*/
-void ordenarTrecho(int *vetor, int inicio, int fim){
-    for(int i = inicio; i < fim; i++){
-        int aux = i;
-        for(int j = i + 1; j < fim; j++){
-            if(vetor[j] < vetor[aux]){
-                aux = j;
-            }
-        }
-        if(aux != i){
-            int temp = vetor[i];
-            vetor[i] = vetor[aux];
-            vetor[aux] = temp;
-        }
-    }
-}
-
-void ordenarMetadeInicial(int *vetor, int metade, int tam){
-    ordenarTrecho(vetor, 0, metade);
-    exibirVetor(vetor, tam);
-}
-
-void ordenarMetadeFinal(int *vetor, int metade, int tam){
-    ordenarTrecho(vetor, metade, tam);
-    exibirVetor(vetor, tam);
-}
-
-void exibirTempo(double t0, double t1, double t2, double t3, double t4, double t5){
-    printf("\n\t> Tempos de execucao:\n");
-    printf(" > Criar o vetor inicial: %lf segundos\n", t0);
-    printf(" > Exibir vetor inicial: %lf segundos\n", t1);
-    printf(" > Ordenar vetor: %lf segundos\n", t2);
-    printf(" > Ordenar novamente o vetor: %lf segundos\n", t3);
-    printf(" > Ordenar do inicio ate a metade: %lf segundos\n", t4);
-    printf(" > Ordenar da metade ate o final: %lf segundos\n", t5);
-}
+#include "ordenar.h"
 
 int main(){
     srand(time(NULL));
@@ -118,23 +12,19 @@ int main(){
 
     clock_t start, end;
 
-    start = clock();
-    int *vetorInicial = criarVetor(tam);
-    end = clock();
-    double tempo0 = ((double)(end - start)) / CLOCKS_PER_SEC;
-
-    
+    int *vetorInicial = criarVetor(tam); // Criacao do vetor inicial
     int *vetorCopiado = criarVetor(tam);
-    vetorInicial = preencherVetor(vetorInicial, tam);
+    int *vetorReverso = criarVetor(tam);
+
+    vetorInicial = preencherVetor(vetorInicial, tam); // Preencher com valores aleatorio de 0 - 100
+    copiarVetorInicial(vetorInicial, vetorCopiado, tam); //  Criamos uma copia para o vetor ainda nao ordenado
     
-    start = clock();
+    start = clock(); // Processando sem alteracao, apenas exibindo
     printf("\n\t> Vetor inicial:\n");
     exibirVetor(vetorInicial, tam);
     end = clock();
     double tempo1 = ((double)(end - start)) / CLOCKS_PER_SEC;
-    
-    copiarVetorInicial(vetorInicial, vetorCopiado, tam);
-    
+
     start = clock();
     printf("\n\t> Vetor Ordenado:\n");
     selectionSort(vetorCopiado, tam);
@@ -159,13 +49,15 @@ int main(){
     ordenarMetadeFinal(vetorInicial, metade, tam);
     end = clock();
     double tempo5 = ((double)(end - start)) / CLOCKS_PER_SEC;
+
+    start = clock();
     printf("\n\t> Vetor reverso\n");
-    int *vetorReverso = criarVetor(tam);
     inverterVetor(vetorCopiado, vetorReverso, tam);
+    end = clock();
+    double tempo0 = ((double)(end-start))/ CLOCKS_PER_SEC;
 
     exibirTempo(tempo0, tempo1, tempo2, tempo3, tempo4, tempo5);
-    
-    printf("\n");
+
     free(vetorInicial);
     free(vetorCopiado);
     return 0;
