@@ -15,6 +15,6 @@ void inverterVetor(int *vetorOrdenado, int *vetorReverso, int tam);
 void ordenarTrecho(int *vetor, int inicio, int fim);
 void ordenarMetadeInicial(int *vetor, int metade, int tam);
 void ordenarMetadeFinal(int *vetor, int metade, int tam);
-void exibirTempo(double t0, double t1, double t2, double t3, double t4, double t5);
+void exibirTempo(double t1, double t2, double t3, double t4, double t5);
 
 #endif

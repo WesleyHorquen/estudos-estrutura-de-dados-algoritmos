@@ -91,12 +91,11 @@ void ordenarMetadeFinal(int *vetor, int metade, int tam){
     exibirVetor(vetor, tam);
 }
 
-void exibirTempo(double t0, double t1, double t2, double t3, double t4, double t5){
+void exibirTempo(double t1, double t2, double t3, double t4, double t5){
     printf("\n\t> Tempos de execucao:\n");
-    printf(" > Invertendo o vetor: %lf segundos\n", t0);
-    printf(" > Exibir vetor inicial: %lf segundos\n", t1);
-    printf(" > Ordenar vetor: %lf segundos\n", t2); // Tempo 1
-    printf(" > Ordenar vetor ja ordenado: %lf segundos\n", t3); // Tempo 2
+    printf(" > Ordenar vetor: %lf segundos\n", t1);
+    printf(" > Ordenar vetor ordenado: %lf segundos\n", t2);
+    printf(" > Ordenar o vetor reverso: %lf segundos\n", t3);
     printf(" > Ordenar do inicio ate a metade: %lf segundos\n", t4);
     printf(" > Ordenar da metade ate o final: %lf segundos\n", t5);
 }
