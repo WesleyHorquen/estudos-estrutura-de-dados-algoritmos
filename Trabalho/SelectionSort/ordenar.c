@@ -46,7 +46,7 @@ void selectionSort(int *vetor, int tam){
             vetor[aux] = temp; // Fazemos a troca deles
         }
     }
-    exibirVetor(vetor, tam);
+    printf("\t> Fim do processo!\n");
 }
 
 void copiarVetorInicial(int *vetorInicial, int *vetorOrdenado, int tam){
@@ -62,7 +62,7 @@ void inverterVetor(int *vetorOrdenado, int *vetorReverso, int tam){
         vetorReverso[j] = vetorOrdenado[i];
         j++;
     }
-    exibirVetor(vetorReverso, tam); // Teste
+    //exibirVetor(vetorReverso, tam); // Teste
 }
 
 void criarVetorComMetade(int *vetorOrdenado, int *vetorOrdenadoReverso, int *novoVetor, int tam){
@@ -75,7 +75,6 @@ void criarVetorComMetade(int *vetorOrdenado, int *vetorOrdenadoReverso, int *nov
         novoVetor[i] = vetorOrdenadoReverso[i];
         
     }
-    exibirVetor(novoVetor, tam);
 }
 
 void ordenarTrecho(int *vetor, int inicio, int fim){
