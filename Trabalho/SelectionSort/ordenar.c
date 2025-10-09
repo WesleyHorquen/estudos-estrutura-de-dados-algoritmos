@@ -65,6 +65,19 @@ void inverterVetor(int *vetorOrdenado, int *vetorReverso, int tam){
     exibirVetor(vetorReverso, tam); // Teste
 }
 
+void criarVetorComMetade(int *vetorOrdenado, int *vetorOrdenadoReverso, int *novoVetor, int tam){
+    //int *novoAux = novoVetor, *novoOrdenado = vetorOrdenado, *novoReverso = vetorOrdenadoReverso;
+    for(int i = 0; i < (float)tam/2; i++){
+        novoVetor[i] = vetorOrdenado[i];
+    }
+    
+    for(int i = tam/2; i < tam; i++){
+        novoVetor[i] = vetorOrdenadoReverso[i];
+        
+    }
+    exibirVetor(novoVetor, tam);
+}
+
 void ordenarTrecho(int *vetor, int inicio, int fim){
     for(int i = inicio; i < fim; i++){
         int aux = i;
