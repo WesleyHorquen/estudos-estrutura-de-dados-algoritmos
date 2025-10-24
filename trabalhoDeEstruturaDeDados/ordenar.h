@@ -1,12 +1,17 @@
+// Estrutura de organização
+// Evita que o arquivo seja incluído mais de uma vez
 #ifndef ORDENAR_H_INCLUDED
 #define ORDENAR_H_INCLUDED
 
-#define TAM 10
+// Define o tamanho do vetor
+#define TAM 15
 
+// Inclui as bibliotecas necessárias
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
+// Declaração das funções
 int *criarVetor();
 void exibir(int *vetor);
 void exibirTempo(double tempo1, double tempo2, double tempo3, double tempo4, double tempo5);
