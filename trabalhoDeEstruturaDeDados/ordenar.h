@@ -21,4 +21,12 @@ int *inverterVetor(int *vetor);
 int *criarVetorEsp1(int *vetorCresc, int *vetorDecre);
 int *criarVetorEsp2(int *vetorCresc, int *vetorDecre);
 
+typedef struct {
+    int valor;
+    char id;
+} Elemento;
+
+void naoEstavel(Elemento *vetorEstavel, int n);
+void selectionSortElementos(Elemento *vetorEstavel, int n);
+
 #endif

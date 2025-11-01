@@ -1,3 +1,4 @@
+// Inclui o arquivo de cabeçalho correspondente
 #include "ordenar.h"
 
 // Função para criar um vetor dinâmico de tamanho TAM
@@ -81,7 +82,7 @@ int *criarVetorEsp2(int *vetorCresc, int *vetorDecre){
         novoVetor[i] = vetorCresc[c];
         c--;
     }
-    c = TAM/2 - 1;
+    c = TAM/2;
     for(int i = TAM/2; i < TAM; i++){
         novoVetor[i] = vetorDecre[c];
         c--;
@@ -89,3 +90,29 @@ int *criarVetorEsp2(int *vetorCresc, int *vetorDecre){
     }
     return novoVetor;
 }
+
+// Função para exibir os elementos e endereços para verificar estabilidade
+void naoEstavel(Elemento *vetorEstavel, int n) {
+    printf("\n> Valores:\n");
+    for (int i = 0; i < n; i++) {
+        printf(" %d:%c |", vetorEstavel[i].valor, vetorEstavel[i].id);
+    }
+    printf("\n\n");
+}
+// Função de Selection Sort para o vetor de Elementos
+void selectionSortElementos(Elemento *vetorEstavel, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        int menor = i;
+        for (int j = i + 1; j < n; j++) {
+            if (vetorEstavel[j].valor < vetorEstavel[menor].valor) {
+                menor = j;
+            }
+        }
+        if (menor != i) {
+            Elemento temp = vetorEstavel[i];
+            vetorEstavel[i] = vetorEstavel[menor];
+            vetorEstavel[menor] = temp;
+        }
+    }
+}
+

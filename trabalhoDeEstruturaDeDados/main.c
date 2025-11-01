@@ -6,6 +6,14 @@
 int main(void) {
 	srand(time(NULL));												// Inicializa o gerador de números aleatórios
 
+Elemento vetorEstavel[5] = {										// Vetor de Elementos para verificar estabilidade
+    {2, 'A'},
+    {5, 'B'},
+    {3, 'C'},
+    {2, 'D'},
+    {1, 'E'}
+};
+
 	int *vetor, *vetorDecr, *vetorEspecial1, *vetorEspecial2;
 	clock_t inicio, fim;											// Variáveis para medir o tempo de execução
 	double tempo1, tempo2, tempo3, tempo4, tempo5;
@@ -13,14 +21,14 @@ int main(void) {
     vetor = criarVetor();											// Cria o vetor dinâmico
     preencher(vetor);												// Preenche o vetor com números aleatórios
 	
-	printf("\t> Ordernar array aleatorio\n");
+	printf("\n\t> Ordernar array aleatorio\n");
 	exibir(vetor);													// Exibe o vetor antes da ordenação
 	inicio = clock();												// Pega o horário inicial
 	selectionSort(vetor);											// Chama a função de ordenação
 	fim = clock();													// Pega o horário final
 	tempo1 = (double)(fim - inicio)/ CLOCKS_PER_SEC;				// Calcula o tempo de execução
 
-	printf("\t> Ordernar array ordenado\n");
+	printf("\n\t> Ordernar array ordenado\n");
 	exibir(vetor);													// Exibe o vetor ordenado					
 	inicio = clock();												// Pega o horário inicial
 	selectionSort(vetor);											// Chama a função de ordenação
@@ -29,7 +37,7 @@ int main(void) {
 
 	vetorDecr = inverterVetor(vetor);								// Chama a função para inverter o vetor
 	
-	printf("\t> Ordernar array decrescente\n");
+	printf("\n\t> Ordernar array decrescente\n");
 	exibir(vetorDecr);												// Exibe o vetor decrescente
 	inicio = clock();												// Pega o horário inicial
 	selectionSort(vetorDecr);										// Ordena o vetor decrescente			
@@ -39,7 +47,7 @@ int main(void) {
 	vetorDecr = inverterVetor(vetor);								// Inverte o vetor para criar os vetores especiais
 	vetorEspecial1 = criarVetorEsp1(vetor, vetorDecr);				// Cria vetor crescente até a metade e decrescente na outra metade
 	
-	printf("\t> Ordernar array primeira metade cresc. e segunda metade decre.:\n");
+	printf("\n\t> Ordernar array primeira metade cresc. e segunda metade decre.:\n");
 	exibir(vetorEspecial1);											// Exibe o vetor especial 1
 	inicio = clock();												// Pega o horário inicial
 	selectionSort(vetorEspecial1);									// Ordena o vetor especial 1
@@ -49,7 +57,7 @@ int main(void) {
 	vetorDecr = inverterVetor(vetor);								// Inverte o vetor para criar o segundo vetor especial
 	vetorEspecial2 = criarVetorEsp2(vetor, vetorDecr);				// Cria vetor decrescente até a metade e crescente na outra metade
 
-	printf("\t> Ordernar array primeira metade decre. e segunda metade cresc.:\n");
+	printf("\n\t> Ordernar array primeira metade decre. e segunda metade cresc.:\n");
 	exibir(vetorEspecial2);											// Exibe o vetor especial 2
 	inicio = clock();												// Pega o horário inicial				
 	selectionSort(vetorEspecial2);									// Ordena o vetor especial 2	
@@ -57,6 +65,12 @@ int main(void) {
 	tempo5 = (double)(fim - inicio)/ CLOCKS_PER_SEC;				// Calcula o tempo de execução
 
 	exibirTempo(tempo1, tempo2, tempo3, tempo4, tempo5);			// Exibe os tempos de execução
+
+	printf("\n\t> Elementos do vetor para verificar estabilidade:\n");
+	naoEstavel(vetorEstavel, 5);									// Mostra os elementos antes de ordenar
+	selectionSortElementos(vetorEstavel, 5);						// Ordena o vetor de Elementos	
+	printf("\t> Apos ordenar:\n");
+	naoEstavel(vetorEstavel, 5);									// Mostra que houve troca na ordem dos elementos iguais
 
 	free(vetor);													// Libera a memória alocada
 	free(vetorDecr);												// Libera a memória alocada
