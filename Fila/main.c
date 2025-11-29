@@ -15,6 +15,7 @@ no *criarNo(int conteudo){
     novo->conteudo = conteudo;
     return novo;
 }
+
 //ENQUEUE - Enfileirar
 void inserirNo(no **head, int conteudo){
     no *p;
